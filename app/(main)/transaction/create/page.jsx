@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";  // ← add this line
+
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { defaultCategories } from "@/data/categories";
@@ -14,7 +16,6 @@ export default function AddTransactionPage() {
   const [accounts, setAccounts] = useState([]);
   const [initialData, setInitialData] = useState(null);
 
-  // ✅ Load accounts on page load
   useEffect(() => {
     async function fetchAccounts() {
       const data = await getUserAccounts();
@@ -23,7 +24,6 @@ export default function AddTransactionPage() {
     fetchAccounts();
   }, []);
 
-  // ✅ If edit mode, load transaction data
   useEffect(() => {
     async function fetchTransaction() {
       if (editId) {
