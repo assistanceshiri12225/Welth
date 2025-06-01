@@ -1,5 +1,5 @@
 import { serve } from "inngest/next";
-import { inngest } from "@/lib/inngest/client";
+import { inngest } from "../../../lib/inngest/client"; // ✅ updated
 
 const testFunction = inngest.createFunction(
   { id: "test-function" },
