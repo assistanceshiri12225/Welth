@@ -1,16 +1,19 @@
 import { serve } from "inngest/next";
-import { inngest } from "../../../lib/inngest/client"; // ✅ updated
 
-const testFunction = inngest.createFunction(
-  { id: "test-function" },
-  { event: "test/debug" },
-  async ({ event }) => {
-    console.log("Test event triggered:", event);
-    return { message: "Test successful" };
-  }
-);
+import { inngest } from "@/lib/inngest/client";
+import {
+  checkBudgetAlerts,
+  generateMonthlyReports,
+  processRecurringTransaction,
+  triggerRecurringTransactions,
+} from "@/lib/inngest/function";
 
-export const { GET, POST } = serve({
+export const { GET, POST, PUT } = serve({
   client: inngest,
-  functions: [testFunction],
+  functions: [
+    processRecurringTransaction,
+    triggerRecurringTransactions,
+    generateMonthlyReports,
+    checkBudgetAlerts,
+  ],
 });
